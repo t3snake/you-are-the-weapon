@@ -12,11 +12,13 @@ var speed_multiplier = 1.0
 @onready var ghost_timer = $GhostEffectTimer
 @onready var dash_timer = $DashTimer
 
+var slash_hitbox
+
 var is_knocked: bool = false # also invincible
 var is_dashing: bool = false
 
 var mouse_pos: Vector2
-var shoot_direction: Vector2
+var attack_direction: Vector2
 var dash_direction: Vector2
 var knockback_direction: Vector2
 
@@ -49,8 +51,8 @@ func _input(event: InputEvent) -> void:
 				anim_queue.push_back(true)
 			return
 		
-		anim_sprite.play_attack_animation(shoot_direction, true)
-		shoot_slash(shoot_direction)
+		anim_sprite.play_attack_animation(attack_direction, true)
+		slash(attack_direction)
 	
 	elif Input.is_action_just_pressed("dash"):
 		dash()
@@ -76,7 +78,7 @@ func handle_animation():
 	var isAttackingInYAxis: bool = false
 	
 	if anim_sprite.animation.begins_with("attack") and anim_sprite.is_playing():
-		isAttackingInYAxis = !( abs(shoot_direction.x) > abs(shoot_direction.y) )
+		isAttackingInYAxis = !( abs(attack_direction.x) > abs(attack_direction.y) )
 	elif velocity.is_zero_approx():
 		anim_sprite.play_idle_animation()
 	else:
@@ -85,33 +87,33 @@ func handle_animation():
 	if kbm_active:
 		anim_sprite.set_flip_h(!isAttackingInYAxis and mouse_pos.x < self.global_position.x)
 	else:
-		anim_sprite.set_flip_h(!isAttackingInYAxis and shoot_direction.x < 0)
+		anim_sprite.set_flip_h(!isAttackingInYAxis and attack_direction.x < 0)
 
 func move_cursor() -> void:
 	if kbm_active:
-		shoot_direction = (mouse_pos - self.global_position).normalized()
+		attack_direction = (mouse_pos - self.global_position).normalized()
 	else:
 		var right_joy_input = Input.get_vector("look_left", "look_right", "look_up", "look_down").normalized()
 		if not right_joy_input.is_zero_approx():
-			shoot_direction = right_joy_input 
+			attack_direction = right_joy_input 
 	
-	cursor.global_position = self.global_position + (shoot_direction*35)
+	cursor.global_position = self.global_position + (attack_direction*35)
 
-func shoot_slash(direction: Vector2):
-	var slash = Slash.instantiate()
-	slash.initially_hide()
-	get_parent().add_child(slash)
-	slash.start(direction, cursor.global_transform)
+func slash(direction: Vector2):
+	slash_hitbox = Slash.instantiate()
+	self.add_child(slash_hitbox)
+	slash_hitbox.set_direction(direction)
 
 func _on_attack_animation_finished() -> void:
 	var anim_sprite = %AnimatedSprite2D
 	if anim_sprite.animation.begins_with("attack"):
+		slash_hitbox.queue_free()
 		if anim_queue.is_empty():
 			speed_multiplier = 1.0
 			handle_animation()
 		else:
-			anim_sprite.play_attack_animation(shoot_direction, anim_queue.pop_front())
-			shoot_slash(shoot_direction)
+			anim_sprite.play_attack_animation(attack_direction, anim_queue.pop_front())
+			slash(attack_direction)
 
 func hit(direction: Vector2) -> void:
 	if not is_knocked:
@@ -138,11 +140,12 @@ func dash():
 	ghost_timer.start()
 	dash_timer.start()
 	speed_multiplier = 5.0
-	dash_direction = shoot_direction
+	dash_direction = attack_direction
 	
 func add_dash_ghosting():
 	var ghost = DashGhostEffect.instantiate()
 	ghost.set_position_and_scale(position, scale)
+	ghost.flip(attack_direction.x < 0)
 	get_parent().add_child(ghost)
 
 func _on_ghost_effect_timer_timeout() -> void:

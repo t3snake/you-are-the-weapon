@@ -50,14 +50,6 @@ func _on_attack_animation_finished() -> void:
 	if anim_sprite.animation.begins_with("attack"):
 		anim_sprite.play_idle_animation()
 
-func hit(direction: Vector2) -> void:
-	knockback(direction)
-
-func _on_health_changed(value: float) -> void:
-	if value <= 0:
-		set_physics_process(false)
-		call_deferred("queue_free")
-
-func knockback(direction: Vector2):
-	var knockbackDirection = direction.normalized() * 200
-	velocity = knockbackDirection
+func hit() -> void:
+	set_physics_process(false)
+	call_deferred("queue_free")
