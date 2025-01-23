@@ -5,6 +5,7 @@ class_name FireGoblin
 @export var SPEED = 300.0
 
 @export var homing_fire: PackedScene
+@export var explosion: PackedScene
 
 @onready var attack_wait_time: Timer = $AttackWaitTime
 @onready var anim_sprite: AnimatedSprite2D = %AnimatedSprite2D
@@ -52,4 +53,8 @@ func _on_attack_animation_finished() -> void:
 
 func hit() -> void:
 	set_physics_process(false)
+	var explode = explosion.instantiate()
+	explode.position = global_position
+	get_parent().add_child(explode)
+	explode.play_explode_animation()
 	call_deferred("queue_free")

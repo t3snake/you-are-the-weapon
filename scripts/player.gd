@@ -11,6 +11,7 @@ var speed_multiplier = 1.0
 @onready var hit_invincibility: Timer = $HitInvincibility
 @onready var ghost_timer = $GhostEffectTimer
 @onready var dash_timer = $DashTimer
+@onready var dash_hitbox = $DashHitbox
 
 var slash_hitbox
 
@@ -99,6 +100,7 @@ func move_cursor() -> void:
 	
 	cursor.global_position = self.global_position + (attack_direction*35)
 
+# slash functions
 func slash(direction: Vector2):
 	slash_hitbox = Slash.instantiate()
 	self.add_child(slash_hitbox)
@@ -115,6 +117,7 @@ func _on_attack_animation_finished() -> void:
 			anim_sprite.play_attack_animation(attack_direction, anim_queue.pop_front())
 			slash(attack_direction)
 
+# damage to player functions
 func hit(direction: Vector2) -> void:
 	if not is_knocked:
 		health_bar.hit()
@@ -125,23 +128,38 @@ func hit(direction: Vector2) -> void:
 		
 		speed_multiplier = 3.0
 
-func _on_health_changed(value: float) -> void:
-	if value <= 0:
-		get_tree().call_deferred("reload_current_scene")
-	
-
 func _on_hit_invincibility_timeout() -> void:
 	is_knocked = false
 	knockback_direction = Vector2(0, 0)
 	speed_multiplier = 1.0
-	
+
+# dash functions
 func dash():
 	is_dashing = true
+	
 	ghost_timer.start()
 	dash_timer.start()
+	
+	dash_hitbox.monitoring = true
+	set_collision_layer_value(2, false)
+	set_collision_layer_value(6, true)
+	
 	speed_multiplier = 5.0
 	dash_direction = attack_direction
+
+func _on_dash_timer_timeout() -> void:
+	is_dashing = false
+	dash_direction = Vector2(0, 0)
 	
+	ghost_timer.stop()
+	dash_timer.stop()
+	
+	dash_hitbox.monitoring = false
+	set_collision_layer_value(2, true)
+	set_collision_layer_value(6, false)
+	
+	speed_multiplier = 1.0
+
 func add_dash_ghosting():
 	var ghost = DashGhostEffect.instantiate()
 	ghost.set_position_and_scale(position, scale)
@@ -151,11 +169,13 @@ func add_dash_ghosting():
 func _on_ghost_effect_timer_timeout() -> void:
 	add_dash_ghosting()
 
-func _on_dash_timer_timeout() -> void:
-	dash_timer.stop()
-	is_dashing = false
-	dash_direction = Vector2(0, 0)
-	
-	ghost_timer.stop()
-	
-	speed_multiplier = 1.0
+func _on_dash_hitbox_body_entered(body: Node2D) -> void:
+	if body is Slime:
+		body.hit()
+	if body is FireGoblin:
+		body.hit()
+
+
+func _on_health_changed(value: float) -> void:
+	if value <= 0:
+		get_tree().call_deferred("reload_current_scene")
