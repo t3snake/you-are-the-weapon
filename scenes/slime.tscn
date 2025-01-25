@@ -116,7 +116,7 @@ size = Vector2(493.5, 282.125)
 [node name="Slime" type="CharacterBody2D"]
 z_index = 2
 collision_layer = 4
-collision_mask = 23
+collision_mask = 7
 script = ExtResource("1_p0gd4")
 SPEED = 140.0
 explosion = ExtResource("2_t0hr5")

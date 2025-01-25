@@ -1,6 +1,7 @@
-[gd_resource type="SpriteFrames" load_steps=50 format=3 uid="uid://bjfh85pfafb4h"]
+[gd_resource type="SpriteFrames" load_steps=57 format=3 uid="uid://bjfh85pfafb4h"]
 
 [ext_resource type="Texture2D" uid="uid://bke51fbx1daf7" path="res://assets/TinySword/Warrior_Blue.png" id="1_5egdy"]
+[ext_resource type="Texture2D" uid="uid://u34q6tkkd2a6" path="res://assets/t3snake/warrior_blue_shotgun_atk.png" id="2_yciqs"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4ubqm"]
 atlas = ExtResource("1_5egdy")
@@ -97,6 +98,30 @@ region = Rect2(768, 576, 192, 192)
 [sub_resource type="AtlasTexture" id="AtlasTexture_7i8gs"]
 atlas = ExtResource("1_5egdy")
 region = Rect2(960, 576, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b8scx"]
+atlas = ExtResource("2_yciqs")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ddbi6"]
+atlas = ExtResource("2_yciqs")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_50ws1"]
+atlas = ExtResource("2_yciqs")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ts8g"]
+atlas = ExtResource("2_yciqs")
+region = Rect2(576, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uy1x2"]
+atlas = ExtResource("2_yciqs")
+region = Rect2(768, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7sin0"]
+atlas = ExtResource("2_yciqs")
+region = Rect2(960, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8tsep"]
 atlas = ExtResource("1_5egdy")
@@ -286,6 +311,29 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack_left_right_combo_2",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b8scx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ddbi6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_50ws1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ts8g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uy1x2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7sin0")
+}],
+"loop": true,
+"name": &"attack_shotgun",
 "speed": 20.0
 }, {
 "frames": [{

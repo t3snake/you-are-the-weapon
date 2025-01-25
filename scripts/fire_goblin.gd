@@ -10,9 +10,13 @@ class_name FireGoblin
 @onready var attack_wait_time: Timer = $AttackWaitTime
 @onready var anim_sprite: AnimatedSprite2D = %AnimatedSprite2D
 
+@onready var level_state := get_node("/root/Level")
+
+func _ready() -> void:
+	level_state.register_enemy_spawn()
 
 func _physics_process(_delta: float) -> void:
-	var player = get_node('/root/Game/Player')
+	var player = %Player
 	var distance = get_distance_from_player(player)
 	var direction = self.global_position.direction_to(player.global_position)
 	
@@ -58,3 +62,4 @@ func hit() -> void:
 	get_parent().add_child(explode)
 	explode.play_explode_animation()
 	call_deferred("queue_free")
+	level_state.register_enemy_death()

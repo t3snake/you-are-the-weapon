@@ -30,8 +30,9 @@ DashGhostEffect = ExtResource("2_teem6")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
 sprite_frames = ExtResource("3_qibpi")
-animation = &"idle"
+animation = &"attack_shotgun"
 autoplay = "idle"
+frame_progress = 0.662541
 script = ExtResource("3_wxloe")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

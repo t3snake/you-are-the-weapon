@@ -7,25 +7,32 @@ class_name Slime
 
 @onready var slime_animation: AnimatedSprite2D = $AnimatedSprite2D
 
+@onready var level_state := get_node("/root/Level")
+
 var player = null
 
 func _ready() -> void:
 	slime_animation.play_spawn_animation()
+	level_state.register_enemy_spawn()
 
 func _physics_process(delta: float) -> void:
-	if player:
-		var collision = move_and_collide((player.position - position).normalized() * SPEED * delta)
-		if collision:
+	if player and player.is_dashing:
+		slime_animation.play_idle_animation()
+		move_and_slide()
+	elif player and !player.is_dashing:
+		var collision = move_and_collide((player.global_position - global_position).normalized() * SPEED * delta)
+		if collision and !player.is_dashing:
 			velocity = velocity.bounce(collision.get_normal())
 			var collider = collision.get_collider()
 			if collider is Player and collider.has_method("hit"):
-				collision.get_collider().hit(velocity)
+				player.hit(velocity)
 		else:
+			move_and_slide()
 			slime_animation.play_idle_animation()
 	else:
 		slime_animation.play_idle_animation()
 		velocity = Vector2.ZERO
-		move_and_slide()
+		
 
 func hit() -> void:
 	slime_animation.play_damaged_animation()
@@ -47,6 +54,9 @@ func _on_slime_animation_finished() -> void:
 		var explode = explosion.instantiate()
 		explode.position = global_position
 		get_parent().add_child(explode)
+		
 		explode.play_explode_animation()
+		
+		level_state.register_enemy_death()
 		queue_free()
 	

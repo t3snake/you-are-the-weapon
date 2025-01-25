@@ -1,27 +1,18 @@
-extends Node2D
+extends Control
 
 
-@onready var pause_menu_ui: Control = $Player/PauseMenu
-var paused = false
+var level
 
 func _ready() -> void:
-	pause_menu_ui.hide()
+	level = get_node("/root/Level")
 
-func _input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("pause"):
-		toggle_pause_menu()
+func _on_resume_button_pressed() -> void:
+	level.toggle_pause_menu()
 
-func _process(_delta: float) -> void:
-	pass
+func _on_restart_button_pressed() -> void:
+	level.toggle_pause_menu()
+	get_tree().reload_current_scene()
 
-func toggle_pause_menu():
-	if paused:
-		pause_menu_ui.hide()
-		Engine.time_scale = 1
-		set_physics_process(true)
-	else:
-		pause_menu_ui.show()
-		Engine.time_scale = 0
-		set_physics_process(false)
-	
-	paused = !paused
+func _on_main_menu_button_pressed() -> void:
+	level.toggle_pause_menu()
+	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
