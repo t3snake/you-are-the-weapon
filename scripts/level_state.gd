@@ -4,7 +4,7 @@ var enemy_count: int
 var is_paused = false
 var is_start = true
 
-@onready var pause_menu_ui: Control = $Player/Camera2D/PauseMenu
+@onready var pause_menu_ui: CanvasLayer = %PauseMenu
 
 func _ready() -> void:
 	GameState.set_level(1)

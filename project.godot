@@ -26,7 +26,8 @@ window/size/viewport_width=1600
 window/size/viewport_height=900
 window/stretch/mode="viewport"
 window/vsync/vsync_mode=0
-mouse_cursor/custom_image="res://assets/t3snake/cursor.png"
+mouse_cursor/custom_image="res://assets/TinySword/mouse_pointer.png"
+mouse_cursor/custom_image_hotspot=Vector2(22, 17)
 
 [input]
 

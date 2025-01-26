@@ -32,7 +32,7 @@ unique_name_in_owner = true
 sprite_frames = ExtResource("3_qibpi")
 animation = &"attack_shotgun"
 autoplay = "idle"
-frame_progress = 0.662541
+frame_progress = 0.49066
 script = ExtResource("3_wxloe")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

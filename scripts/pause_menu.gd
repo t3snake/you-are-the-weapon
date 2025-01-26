@@ -1,5 +1,4 @@
-extends Control
-
+extends CanvasLayer
 
 var level
 
