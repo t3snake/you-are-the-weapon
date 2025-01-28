@@ -14,4 +14,4 @@ func _on_restart_button_pressed() -> void:
 
 func _on_main_menu_button_pressed() -> void:
 	level.toggle_pause_menu()
-	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+	get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")

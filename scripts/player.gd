@@ -31,11 +31,10 @@ var anim_queue: Array = []
 @onready var shotgun_hitbox := %ShotgunHitbox
 @export var dash_ghost_effect: PackedScene
 
+@onready var level_state := get_node("/root/Level")
+
 func _ready() -> void:
-	self.add_child(slash_hitbox)
 	slash_hitbox.disable()
-	
-	self.add_child(shotgun_hitbox)
 	shotgun_hitbox.disable()
 
 func _input(event: InputEvent) -> void:
@@ -203,4 +202,4 @@ func _on_dash_hitbox_body_entered(body: Node2D) -> void:
 
 func _on_health_changed(value: float) -> void:
 	if value <= 0:
-		get_tree().call_deferred("reload_current_scene")
+		level_state.register_player_death()

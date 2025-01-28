@@ -1,14 +1,22 @@
 extends Node2D
 
+@export var level_id: int
+
 var enemy_count: int
 var is_paused = false
 var is_start = true
 
+var is_dead = false
+
 @onready var pause_menu_ui: CanvasLayer = %PauseMenu
 
 func _ready() -> void:
-	GameState.set_level(1)
+	GameState.set_level(level_id)
+	GameState.start_timer()
 	pause_menu_ui.hide()
+
+func register_player_death():
+	is_dead = true
 
 func register_enemy_spawn():
 	is_start = false
@@ -23,8 +31,13 @@ func _input(_event: InputEvent) -> void:
 		toggle_pause_menu()
 
 func _process(_delta: float) -> void:
+	if is_dead:
+		GameState.stop_timer()
+		get_tree().change_scene_to_file("res://scenes/ui/died_menu.tscn")
+	
 	if !is_start and is_level_finished():
-		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+		GameState.stop_timer()
+		get_tree().change_scene_to_file("res://scenes/ui/end_menu.tscn")
 
 func is_level_finished() -> bool:
 	return enemy_count == 0
