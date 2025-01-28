@@ -1,14 +1,28 @@
-[gd_scene load_steps=23 format=3 uid="uid://c8jsiqrfeey7p"]
+[gd_scene load_steps=27 format=3 uid="uid://c8jsiqrfeey7p"]
 
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_3rabl"]
 [ext_resource type="Texture2D" uid="uid://bke51fbx1daf7" path="res://assets/TinySword/Warrior_Blue.png" id="2_yqdl0"]
 [ext_resource type="Texture2D" uid="uid://dlk155uraykp2" path="res://assets/TinySword/Torch_Yellow.png" id="3_0ei4v"]
+[ext_resource type="FontFile" uid="uid://cfrp63w0hyxlv" path="res://assets/MathewCarter/Charter Regular.ttf" id="3_gpbgy"]
+[ext_resource type="StyleBox" uid="uid://xeu7s8jdw8y2" path="res://resources/button_hover_texture.tres" id="4_ptpl5"]
 
 [sub_resource type="SystemFont" id="SystemFont_5mapu"]
 font_names = PackedStringArray("Sans-Serif")
 
 [sub_resource type="SystemFont" id="SystemFont_0yipa"]
 font_names = PackedStringArray("Sans-Serif")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_v03i4"]
+load_path = "res://.godot/imported/Button_Blue_9Slides.png-26b0a6a8988a17ad04510c84eece77e0.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nxthw"]
+texture = SubResource("CompressedTexture2D_v03i4")
+texture_margin_left = 64.0
+texture_margin_top = 64.0
+texture_margin_right = 64.0
+texture_margin_bottom = 64.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dtbdk"]
 atlas = ExtResource("2_yqdl0")
@@ -128,9 +142,12 @@ anchors_preset = 0
 script = ExtResource("1_3rabl")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 0
-offset_right = 56.0
-offset_bottom = 56.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(28.76, 16.2)
 color = Color(0.49022, 0.857903, 0.715522, 1)
 
@@ -140,10 +157,10 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 709.0
-offset_top = 538.0
-offset_right = 836.0
-offset_bottom = 606.0
+offset_left = 493.0
+offset_top = 545.0
+offset_right = 1108.0
+offset_bottom = 783.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -161,6 +178,49 @@ size_flags_horizontal = 4
 size_flags_vertical = 8
 theme_override_fonts/font = SubResource("SystemFont_0yipa")
 theme_override_font_sizes/font_size = 20
+text = "Quit"
+
+[node name="PlayButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("3_gpbgy")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/focus = ExtResource("4_ptpl5")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxTexture_nxthw")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_nxthw")
+theme_override_styles/hover_mirrored = ExtResource("4_ptpl5")
+theme_override_styles/hover = ExtResource("4_ptpl5")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxTexture_nxthw")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_nxthw")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxTexture_nxthw")
+theme_override_styles/normal = SubResource("StyleBoxTexture_nxthw")
+text = "Play
+"
+
+[node name="MainMenuButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../PlayButton")
+focus_next = NodePath("../PlayButton")
+focus_previous = NodePath(".")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("3_gpbgy")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/focus = ExtResource("4_ptpl5")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxTexture_nxthw")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_nxthw")
+theme_override_styles/hover_mirrored = ExtResource("4_ptpl5")
+theme_override_styles/hover = ExtResource("4_ptpl5")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxTexture_nxthw")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_nxthw")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxTexture_nxthw")
+theme_override_styles/normal = SubResource("StyleBoxTexture_nxthw")
 text = "Quit"
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]

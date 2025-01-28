@@ -332,7 +332,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7sin0")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_shotgun",
 "speed": 20.0
 }, {

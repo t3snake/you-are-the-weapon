@@ -1,14 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://dv7wsjusc4kpi"]
+[gd_scene load_steps=12 format=3 uid="uid://dv7wsjusc4kpi"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_hnj3e"]
 [ext_resource type="PackedScene" uid="uid://dw64ibpnrt1bu" path="res://scenes/slash.tscn" id="2_md23f"]
-[ext_resource type="PackedScene" uid="uid://ojg0qw01vfjx" path="res://scenes/dash_ghost_effect.tscn" id="2_teem6"]
 [ext_resource type="SpriteFrames" uid="uid://bjfh85pfafb4h" path="res://resources/player.tres" id="3_qibpi"]
 [ext_resource type="Script" path="res://scripts/player_animations.gd" id="3_wxloe"]
 [ext_resource type="Texture2D" uid="uid://kfm4rtw7sldu" path="res://assets/TinySword/cursor.png" id="4_57dgs"]
 [ext_resource type="Script" path="res://scripts/shield.gd" id="6_b8h4f"]
 [ext_resource type="PackedScene" uid="uid://c3k7ii7vaqjay" path="res://scenes/health_bar.tscn" id="6_l2k7d"]
-[ext_resource type="Script" path="res://scripts/dash_hitbox.gd" id="9_m6x35"]
+[ext_resource type="PackedScene" uid="uid://cpyginnql37e4" path="res://scenes/shotgun_hitbox.tscn" id="8_13pdd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_y035s"]
 radius = 27.0185
@@ -24,15 +23,12 @@ z_index = 1
 collision_layer = 2
 collision_mask = 13
 script = ExtResource("1_hnj3e")
-Slash = ExtResource("2_md23f")
-DashGhostEffect = ExtResource("2_teem6")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
 sprite_frames = ExtResource("3_qibpi")
 animation = &"attack_shotgun"
 autoplay = "idle"
-frame_progress = 0.49066
 script = ExtResource("3_wxloe")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -71,11 +67,16 @@ wait_time = 0.05
 wait_time = 0.15
 one_shot = true
 
+[node name="SlashHitbox" parent="." instance=ExtResource("2_md23f")]
+unique_name_in_owner = true
+
+[node name="ShotgunHitbox" parent="." instance=ExtResource("8_13pdd")]
+unique_name_in_owner = true
+
 [node name="DashHitbox" type="Area2D" parent="."]
 collision_layer = 32
 collision_mask = 5
 monitoring = false
-script = ExtResource("9_m6x35")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DashHitbox"]
 position = Vector2(4.5, 2)

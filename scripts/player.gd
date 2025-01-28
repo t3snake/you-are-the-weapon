@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 class_name Player
 
-
 @export var SPEED = 200.0
 var speed_multiplier = 1.0
 
@@ -13,32 +12,40 @@ var speed_multiplier = 1.0
 @onready var dash_timer = $DashTimer
 @onready var dash_hitbox = $DashHitbox
 
-var slash_hitbox
-
 var is_knocked: bool = false # also invincible
 var is_dashing: bool = false
+var is_shooting: bool = false
 
 var mouse_pos: Vector2
 var attack_direction: Vector2
 var dash_direction: Vector2
 var knockback_direction: Vector2
+var shotgun_recoil_direction: Vector2
 
 var kbm_active: bool
 
 # Attack animation queue
 var anim_queue: Array = []
 
-@export var Slash: PackedScene
-@export var DashGhostEffect: PackedScene
+@onready var slash_hitbox := %SlashHitbox
+@onready var shotgun_hitbox := %ShotgunHitbox
+@export var dash_ghost_effect: PackedScene
+
+func _ready() -> void:
+	self.add_child(slash_hitbox)
+	slash_hitbox.disable()
+	
+	self.add_child(shotgun_hitbox)
+	shotgun_hitbox.disable()
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion or event is InputEventKey:
 		kbm_active = true
 	elif event is InputEventJoypadButton or event is InputEventJoypadMotion:
 		kbm_active = false
-		
-	if Input.is_action_just_pressed("shoot"):
-		var anim_sprite = %AnimatedSprite2D
+	
+	var anim_sprite := %AnimatedSprite2D
+	if Input.is_action_just_pressed("attack"):
 		# half player speed while shooting
 		speed_multiplier = 0.5
 		
@@ -57,6 +64,9 @@ func _input(event: InputEvent) -> void:
 	
 	elif Input.is_action_just_pressed("dash"):
 		dash()
+	elif Input.is_action_just_pressed("shotgun"):
+		anim_sprite.play_shotgun_animation()
+		shoot_shotgun()
 
 func _physics_process(_delta: float) -> void:
 	mouse_pos = get_global_mouse_position()
@@ -64,6 +74,8 @@ func _physics_process(_delta: float) -> void:
 	var move_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if is_knocked:
 		velocity = knockback_direction * SPEED * speed_multiplier
+	if is_shooting:
+		velocity = shotgun_recoil_direction * SPEED * speed_multiplier
 	elif is_dashing:
 		velocity = dash_direction * SPEED * speed_multiplier
 	else:
@@ -75,7 +87,7 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 func handle_animation():
-	var anim_sprite = %AnimatedSprite2D
+	var anim_sprite := %AnimatedSprite2D
 	var isAttackingInYAxis: bool = false
 	
 	if anim_sprite.animation.begins_with("attack") and anim_sprite.is_playing():
@@ -100,16 +112,30 @@ func move_cursor() -> void:
 	
 	cursor.global_position = self.global_position + (attack_direction*35)
 
+# shotgun function
+func shoot_shotgun():
+	is_shooting = true
+	
+	shotgun_hitbox.enable()
+	shotgun_hitbox.set_direction(attack_direction)
+	
+	speed_multiplier = 3.0
+	shotgun_recoil_direction = attack_direction*-1
+
 # slash functions
 func slash(direction: Vector2):
-	slash_hitbox = Slash.instantiate()
-	self.add_child(slash_hitbox)
+	slash_hitbox.enable()
 	slash_hitbox.set_direction(direction)
 
 func _on_attack_animation_finished() -> void:
-	var anim_sprite = %AnimatedSprite2D
-	if anim_sprite.animation.begins_with("attack"):
-		slash_hitbox.queue_free()
+	var anim_sprite := %AnimatedSprite2D
+	if anim_sprite.animation == &"attack_shotgun":
+		is_shooting = false
+		speed_multiplier = 1.0
+		shotgun_hitbox.disable()
+		handle_animation()
+	elif anim_sprite.animation.begins_with("attack"):
+		slash_hitbox.disable()
 		if anim_queue.is_empty():
 			speed_multiplier = 1.0
 			handle_animation()
@@ -161,7 +187,7 @@ func _on_dash_timer_timeout() -> void:
 	speed_multiplier = 1.0
 
 func add_dash_ghosting():
-	var ghost = DashGhostEffect.instantiate()
+	var ghost = dash_ghost_effect.instantiate()
 	ghost.set_position_and_scale(position, scale)
 	ghost.flip(attack_direction.x < 0)
 	get_parent().add_child(ghost)
@@ -174,7 +200,6 @@ func _on_dash_hitbox_body_entered(body: Node2D) -> void:
 		body.hit()
 	if body is FireGoblin:
 		body.hit()
-
 
 func _on_health_changed(value: float) -> void:
 	if value <= 0:

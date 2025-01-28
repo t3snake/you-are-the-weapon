@@ -20,3 +20,6 @@ func play_attack_animation(direction: Vector2, is_start_combo: bool) -> void:
 			play("attack_down" + suffix)
 		else:
 			play("attack_up" + suffix)
+
+func play_shotgun_animation() -> void:
+	play("attack_shotgun")

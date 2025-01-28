@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpyginnql37e4"]
+
+[ext_resource type="Script" path="res://scripts/shotgun_hitbox.gd" id="1_pk7ge"]
+
+[node name="ShotgunHitbox" type="Area2D"]
+collision_layer = 16
+collision_mask = 5
+script = ExtResource("1_pk7ge")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, 0, 120, 60, 120, -60)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
