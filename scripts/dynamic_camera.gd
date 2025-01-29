@@ -18,6 +18,8 @@ func _process(delta: float) -> void:
 	var new_position = position + (direction * target_distance * SPEED * delta)
 	if new_position.length() < 200:
 		position = new_position
+	else:
+		position = new_position.normalized() * 200
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and GameState.kbm_active:
@@ -26,4 +28,3 @@ func _input(event: InputEvent) -> void:
 	elif !GameState.kbm_active:
 		joystick_direction = Input.get_vector("look_left", "look_right", "look_up", "look_down")
 		target_distance = (joystick_direction.length()) * 10 * (2.0/3.0)
-		print(target_distance)
