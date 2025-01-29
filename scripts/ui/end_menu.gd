@@ -7,7 +7,7 @@ func _ready() -> void:
 	%ClearTime.text = "Clear Time: %.2f seconds" % GameState.timer
 	GameState.set_level_cleared(current_level)
 	
-	var high_score = GameState.highscore_map[current_level]
+	var high_score = GameState.highscore_map[current_level - 1]
 	%BestClearTime.text = "Best Clear Time: %.2f seconds" % high_score
 	
 

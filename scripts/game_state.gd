@@ -9,8 +9,7 @@ var current_level: int
 
 var highscore_map: Dictionary
 
-enum Outcome {DIED, BEAT}
-var outcome: Outcome
+var kbm_active: bool
 
 func _ready() -> void:
 	levels_cleared = 0
@@ -20,11 +19,16 @@ func _ready() -> void:
 	highscore_map = {}
 	for lvl in range(total_levels):
 		highscore_map[lvl] = 0
-		
 
 func _process(delta: float) -> void:
 	if is_timer_active:
 		timer += delta
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion or event is InputEventKey:
+		kbm_active = true
+	elif event is InputEventJoypadButton or event is InputEventJoypadMotion:
+		kbm_active = false
 
 func start_timer() -> void:
 	is_timer_active = true
@@ -42,9 +46,9 @@ func set_level_cleared(level: int) -> void:
 	if level > levels_cleared:
 		levels_cleared = level
 	
-	if highscore_map[level] == 0:
-		highscore_map[level] = timer
-	elif timer < highscore_map[level]:
-		highscore_map[level] = timer
+	if highscore_map[level - 1] == 0:
+		highscore_map[level - 1] = timer
+	elif timer < highscore_map[level - 1]:
+		highscore_map[level - 1] = timer
 	
 	timer = 0

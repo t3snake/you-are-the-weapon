@@ -11,6 +11,7 @@ var speed_multiplier = 1.0
 @onready var ghost_timer = $GhostEffectTimer
 @onready var dash_timer = $DashTimer
 @onready var dash_hitbox = $DashHitbox
+@onready var shotgun_recoil_timer: Timer = $ShotgunRecoilTimer
 
 var is_knocked: bool = false # also invincible
 var is_dashing: bool = false
@@ -21,8 +22,6 @@ var attack_direction: Vector2
 var dash_direction: Vector2
 var knockback_direction: Vector2
 var shotgun_recoil_direction: Vector2
-
-var kbm_active: bool
 
 # Attack animation queue
 var anim_queue: Array = []
@@ -37,12 +36,7 @@ func _ready() -> void:
 	slash_hitbox.disable()
 	shotgun_hitbox.disable()
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion or event is InputEventKey:
-		kbm_active = true
-	elif event is InputEventJoypadButton or event is InputEventJoypadMotion:
-		kbm_active = false
-	
+func _input(_event: InputEvent) -> void:
 	var anim_sprite := %AnimatedSprite2D
 	if Input.is_action_just_pressed("attack"):
 		# half player speed while shooting
@@ -96,13 +90,13 @@ func handle_animation():
 	else:
 		anim_sprite.play_walk_animation()
 	
-	if kbm_active:
+	if GameState.kbm_active:
 		anim_sprite.set_flip_h(!isAttackingInYAxis and mouse_pos.x < self.global_position.x)
 	else:
 		anim_sprite.set_flip_h(!isAttackingInYAxis and attack_direction.x < 0)
 
 func move_cursor() -> void:
-	if kbm_active:
+	if GameState.kbm_active:
 		attack_direction = (mouse_pos - self.global_position).normalized()
 	else:
 		var right_joy_input = Input.get_vector("look_left", "look_right", "look_up", "look_down").normalized()
@@ -118,8 +112,15 @@ func shoot_shotgun():
 	shotgun_hitbox.enable()
 	shotgun_hitbox.set_direction(attack_direction)
 	
-	speed_multiplier = 3.0
+	speed_multiplier = 4.0
 	shotgun_recoil_direction = attack_direction*-1
+	
+	shotgun_recoil_timer.start()
+
+func _on_shotgun_recoil_timer_timeout() -> void:
+	is_shooting = false
+	speed_multiplier = 1.0
+	shotgun_hitbox.disable()
 
 # slash functions
 func slash(direction: Vector2):
@@ -129,9 +130,6 @@ func slash(direction: Vector2):
 func _on_attack_animation_finished() -> void:
 	var anim_sprite := %AnimatedSprite2D
 	if anim_sprite.animation == &"attack_shotgun":
-		is_shooting = false
-		speed_multiplier = 1.0
-		shotgun_hitbox.disable()
 		handle_animation()
 	elif anim_sprite.animation.begins_with("attack"):
 		slash_hitbox.disable()
@@ -169,7 +167,7 @@ func dash():
 	set_collision_layer_value(2, false)
 	set_collision_layer_value(6, true)
 	
-	speed_multiplier = 5.0
+	speed_multiplier = 6.0
 	dash_direction = attack_direction
 
 func _on_dash_timer_timeout() -> void:
