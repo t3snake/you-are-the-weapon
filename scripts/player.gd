@@ -25,6 +25,7 @@ var shotgun_recoil_direction: Vector2
 
 # Attack animation queue
 var anim_queue: Array = []
+@onready var anim_sprite := %AnimatedSprite2D
 
 @onready var slash_hitbox := %SlashHitbox
 @onready var shotgun_hitbox := %ShotgunHitbox
@@ -37,7 +38,6 @@ func _ready() -> void:
 	shotgun_hitbox.disable()
 
 func _input(_event: InputEvent) -> void:
-	var anim_sprite := %AnimatedSprite2D
 	if Input.is_action_just_pressed("attack"):
 		# half player speed while shooting
 		speed_multiplier = 0.5
@@ -80,8 +80,14 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 func handle_animation():
-	var anim_sprite := %AnimatedSprite2D
 	var isAttackingInYAxis: bool = false
+	
+	if anim_sprite.animation == &"attack_shotgun":
+		if anim_sprite.frame == 3:
+			speed_multiplier = 4.0
+			shotgun_recoil_direction = attack_direction*-1
+			shotgun_recoil_timer.start()
+			shotgun_hitbox.disable()
 	
 	if anim_sprite.animation.begins_with("attack") and anim_sprite.is_playing():
 		isAttackingInYAxis = !( abs(attack_direction.x) > abs(attack_direction.y) )
@@ -112,15 +118,13 @@ func shoot_shotgun():
 	shotgun_hitbox.enable()
 	shotgun_hitbox.set_direction(attack_direction)
 	
-	speed_multiplier = 4.0
-	shotgun_recoil_direction = attack_direction*-1
+	# direction is set when frame 3 happens
+	shotgun_recoil_direction = Vector2.ZERO
 	
-	shotgun_recoil_timer.start()
 
 func _on_shotgun_recoil_timer_timeout() -> void:
 	is_shooting = false
 	speed_multiplier = 1.0
-	shotgun_hitbox.disable()
 
 # slash functions
 func slash(direction: Vector2):
@@ -128,7 +132,6 @@ func slash(direction: Vector2):
 	slash_hitbox.set_direction(direction)
 
 func _on_attack_animation_finished() -> void:
-	var anim_sprite := %AnimatedSprite2D
 	if anim_sprite.animation == &"attack_shotgun":
 		handle_animation()
 	elif anim_sprite.animation.begins_with("attack"):
