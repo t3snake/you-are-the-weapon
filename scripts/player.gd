@@ -83,7 +83,7 @@ func handle_animation():
 	var isAttackingInYAxis: bool = false
 	
 	if anim_sprite.animation == &"attack_shotgun":
-		if anim_sprite.frame == 3:
+		if anim_sprite.frame == 2:
 			speed_multiplier = 4.0
 			shotgun_recoil_direction = attack_direction*-1
 			shotgun_recoil_timer.start()
@@ -118,7 +118,7 @@ func shoot_shotgun():
 	shotgun_hitbox.enable()
 	shotgun_hitbox.set_direction(attack_direction)
 	
-	# direction is set when frame 3 happens
+	# direction is set when on frame 2 of animation
 	shotgun_recoil_direction = Vector2.ZERO
 	
 

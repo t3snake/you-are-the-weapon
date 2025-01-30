@@ -29,6 +29,10 @@ window/vsync/vsync_mode=0
 mouse_cursor/custom_image="res://assets/TinySword/mouse_pointer.png"
 mouse_cursor/custom_image_hotspot=Vector2(22, 17)
 
+[gui]
+
+theme/custom_font="res://assets/MathewCarter/Charter Regular.ttf"
+
 [input]
 
 move_up={

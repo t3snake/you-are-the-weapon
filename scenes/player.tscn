@@ -93,7 +93,6 @@ wait_time = 0.05
 [connection signal="value_changed" from="HealthBar" to="." method="_on_health_changed"]
 [connection signal="timeout" from="HitInvincibility" to="." method="_on_hit_invincibility_timeout"]
 [connection signal="timeout" from="ShotgunRecoilTimer" to="." method="_on_shotgun_recoil_timer_timeout"]
-[connection signal="area_entered" from="DashHitbox" to="." method="_on_dash_hitbox_area_entered"]
 [connection signal="body_entered" from="DashHitbox" to="." method="_on_dash_hitbox_body_entered"]
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="GhostEffectTimer" to="." method="_on_ghost_effect_timer_timeout"]
