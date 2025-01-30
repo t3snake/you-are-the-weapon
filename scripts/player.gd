@@ -18,6 +18,8 @@ var is_dashing: bool = false
 var is_shooting: bool = false
 
 var mouse_pos: Vector2
+
+var move_direction: Vector2
 var attack_direction: Vector2
 var dash_direction: Vector2
 var knockback_direction: Vector2
@@ -64,7 +66,7 @@ func _input(_event: InputEvent) -> void:
 func _physics_process(_delta: float) -> void:
 	mouse_pos = get_global_mouse_position()
 	
-	var move_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	move_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if is_knocked:
 		velocity = knockback_direction * SPEED * speed_multiplier
 	if is_shooting:
@@ -169,9 +171,10 @@ func dash():
 	dash_hitbox.monitoring = true
 	set_collision_layer_value(2, false)
 	set_collision_layer_value(6, true)
+	set_collision_mask_value(3, false)
 	
 	speed_multiplier = 6.0
-	dash_direction = attack_direction
+	dash_direction = move_direction
 
 func _on_dash_timer_timeout() -> void:
 	is_dashing = false
@@ -183,6 +186,7 @@ func _on_dash_timer_timeout() -> void:
 	dash_hitbox.monitoring = false
 	set_collision_layer_value(2, true)
 	set_collision_layer_value(6, false)
+	set_collision_mask_value(3, true)
 	
 	speed_multiplier = 1.0
 

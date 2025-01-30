@@ -16,23 +16,26 @@ func _ready() -> void:
 	level_state.register_enemy_spawn()
 
 func _physics_process(delta: float) -> void:
-	if player and player.is_dashing:
+	if !player:
+		slime_animation.play_idle_animation()
+		velocity = Vector2.ZERO
+		move_and_slide()
+		return
+		
+	velocity = (player.global_position - global_position).normalized() * SPEED * delta
+	
+	if player.is_dashing:
 		slime_animation.play_idle_animation()
 		move_and_slide()
-	elif player and !player.is_dashing:
-		var collision = move_and_collide((player.global_position - global_position).normalized() * SPEED * delta)
-		if collision and !player.is_dashing:
+	elif !player.is_dashing:
+		var collision = move_and_collide(velocity)
+		if collision:
 			velocity = velocity.bounce(collision.get_normal())
 			var collider = collision.get_collider()
 			if collider is Player and collider.has_method("hit"):
 				player.hit(velocity)
 		else:
-			move_and_slide()
 			slime_animation.play_idle_animation()
-	else:
-		slime_animation.play_idle_animation()
-		velocity = Vector2.ZERO
-		
 
 func hit() -> void:
 	slime_animation.play_damaged_animation()

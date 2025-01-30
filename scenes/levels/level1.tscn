@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://bu31hlst7ow2l"]
+[gd_scene load_steps=13 format=4 uid="uid://bu31hlst7ow2l"]
 
 [ext_resource type="Script" path="res://scripts/level_state.gd" id="1_kfxkx"]
 [ext_resource type="PackedScene" uid="uid://dv7wsjusc4kpi" path="res://scenes/player.tscn" id="2_t5jgk"]
@@ -11,6 +11,7 @@
 [ext_resource type="TileSet" uid="uid://dt400gvf2j082" path="res://resources/tileset/Ground.tres" id="5_qekkk"]
 [ext_resource type="PackedScene" uid="uid://cidlj06ne568v" path="res://scenes/slime.tscn" id="6_supbf"]
 [ext_resource type="PackedScene" uid="uid://ojg0qw01vfjx" path="res://scenes/dash_ghost_effect.tscn" id="8_bjqyk"]
+[ext_resource type="PackedScene" uid="uid://dy2esm4akhav1" path="res://scenes/ui/hud.tscn" id="12_bj4wg"]
 
 [node name="Level" type="Node2D"]
 y_sort_enabled = true
@@ -66,3 +67,6 @@ position = Vector2(975, -291)
 [node name="PauseMenu" parent="." instance=ExtResource("4_pqq20")]
 unique_name_in_owner = true
 visible = false
+
+[node name="HUD" parent="." instance=ExtResource("12_bj4wg")]
+unique_name_in_owner = true

@@ -3,7 +3,7 @@ extends Node
 var timer: float
 var is_timer_active: bool
 
-var total_levels: int = 2
+var total_levels: int = 3
 var levels_cleared: int
 var current_level: int
 
@@ -33,6 +33,9 @@ func _input(event: InputEvent) -> void:
 func start_timer() -> void:
 	is_timer_active = true
 	timer = 0
+
+func unpause_timer() -> void:
+	is_timer_active = true
 
 func stop_timer() -> void:
 	is_timer_active = false
