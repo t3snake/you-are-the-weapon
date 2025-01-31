@@ -57,9 +57,9 @@ func _input(_event: InputEvent) -> void:
 		anim_sprite.play_attack_animation(attack_direction, true)
 		slash(attack_direction)
 	
-	elif Input.is_action_just_pressed("dash"):
+	elif Input.is_action_just_pressed("dash") and %DashCooldownTimer.is_stopped():
 		dash()
-	elif Input.is_action_just_pressed("shotgun"):
+	elif Input.is_action_just_pressed("shotgun") and %ShotgunCooldownTimer.is_stopped():
 		anim_sprite.play_shotgun_animation()
 		shoot_shotgun()
 
@@ -113,6 +113,7 @@ func move_cursor() -> void:
 	
 	cursor.global_position = self.global_position + (attack_direction*35)
 
+
 # shotgun function
 func shoot_shotgun():
 	is_shooting = true
@@ -120,13 +121,19 @@ func shoot_shotgun():
 	shotgun_hitbox.enable()
 	shotgun_hitbox.set_direction(attack_direction)
 	
+	%ShotgunCooldownTimer.start()
+	level_state.hud.set_shotgun_on_cooldown()
+	
 	# direction is set when on frame 2 of animation
 	shotgun_recoil_direction = Vector2.ZERO
-	
 
 func _on_shotgun_recoil_timer_timeout() -> void:
 	is_shooting = false
 	speed_multiplier = 1.0
+
+func _on_shotgun_cooldown_timer_timeout() -> void:
+	level_state.hud.set_shotgun_ready()
+
 
 # slash functions
 func slash(direction: Vector2):
@@ -145,6 +152,7 @@ func _on_attack_animation_finished() -> void:
 			anim_sprite.play_attack_animation(attack_direction, anim_queue.pop_front())
 			slash(attack_direction)
 
+
 # damage to player functions
 func hit(direction: Vector2) -> void:
 	if not is_knocked:
@@ -161,6 +169,7 @@ func _on_hit_invincibility_timeout() -> void:
 	knockback_direction = Vector2(0, 0)
 	speed_multiplier = 1.0
 
+
 # dash functions
 func dash():
 	is_dashing = true
@@ -172,6 +181,9 @@ func dash():
 	set_collision_layer_value(2, false)
 	set_collision_layer_value(6, true)
 	set_collision_mask_value(3, false)
+	
+	%DashCooldownTimer.start()
+	level_state.hud.set_dash_on_cooldown()
 	
 	speed_multiplier = 6.0
 	dash_direction = move_direction
@@ -190,6 +202,9 @@ func _on_dash_timer_timeout() -> void:
 	
 	speed_multiplier = 1.0
 
+func _on_dash_cooldown_timer_timeout() -> void:
+	level_state.hud.set_dash_ready()
+
 func add_dash_ghosting():
 	var ghost = dash_ghost_effect.instantiate()
 	ghost.set_position_and_scale(position, scale)
@@ -204,6 +219,7 @@ func _on_dash_hitbox_body_entered(body: Node2D) -> void:
 		body.hit()
 	if body is FireGoblin:
 		body.hit()
+
 
 func _on_health_changed(value: float) -> void:
 	if value <= 0:

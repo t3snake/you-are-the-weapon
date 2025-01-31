@@ -76,3 +76,9 @@ theme_override_font_sizes/font_size = 40
 text = "Shotgun"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="HudUpdateTimer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[connection signal="timeout" from="HudUpdateTimer" to="." method="_on_hud_update_timer_timeout"]

@@ -250,7 +250,7 @@ theme_override_styles/pressed_mirrored = SubResource("StyleBoxTexture_lk0on")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_lk0on")
 theme_override_styles/normal_mirrored = SubResource("StyleBoxTexture_lk0on")
 theme_override_styles/normal = SubResource("StyleBoxTexture_lk0on")
-text = "Level 2"
+text = "Level 3"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="TextureRect/MarginContainer/HBoxContainer"]
 layout_mode = 2

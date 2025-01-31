@@ -58,6 +58,18 @@ offset_right = 69.0
 offset_bottom = -62.0
 health = 3
 
+[node name="AbilityCooldown" type="Node" parent="."]
+
+[node name="DashCooldownTimer" type="Timer" parent="AbilityCooldown"]
+unique_name_in_owner = true
+wait_time = 2.0
+one_shot = true
+
+[node name="ShotgunCooldownTimer" type="Timer" parent="AbilityCooldown"]
+unique_name_in_owner = true
+wait_time = 2.0
+one_shot = true
+
 [node name="HitInvincibility" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
@@ -91,6 +103,8 @@ wait_time = 0.05
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_attack_animation_finished"]
 [connection signal="body_entered" from="Cursor/Shield" to="Cursor/Shield" method="_on_body_entered"]
 [connection signal="value_changed" from="HealthBar" to="." method="_on_health_changed"]
+[connection signal="timeout" from="AbilityCooldown/DashCooldownTimer" to="." method="_on_dash_cooldown_timer_timeout"]
+[connection signal="timeout" from="AbilityCooldown/ShotgunCooldownTimer" to="." method="_on_shotgun_cooldown_timer_timeout"]
 [connection signal="timeout" from="HitInvincibility" to="." method="_on_hit_invincibility_timeout"]
 [connection signal="timeout" from="ShotgunRecoilTimer" to="." method="_on_shotgun_recoil_timer_timeout"]
 [connection signal="body_entered" from="DashHitbox" to="." method="_on_dash_hitbox_body_entered"]

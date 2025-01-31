@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://p0ofd54k4d8j"
-path="res://.godot/imported/Bridge_All.png-a485656924c0c1ac3b37e9afe9a3fdba.ctex"
+uid="uid://bk5r8m12csyx7"
+path="res://.godot/imported/slime_green.png-620a5951b7e149368e3c959b0d912c87.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/TinySword/Bridge_All.png"
-dest_files=["res://.godot/imported/Bridge_All.png-a485656924c0c1ac3b37e9afe9a3fdba.ctex"]
+source_file="res://assets/brackeys/slime_green.png"
+dest_files=["res://.godot/imported/slime_green.png-620a5951b7e149368e3c959b0d912c87.ctex"]
 
 [params]
 
