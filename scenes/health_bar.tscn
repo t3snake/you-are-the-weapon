@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c3k7ii7vaqjay"]
 
-[ext_resource type="Script" path="res://scripts/health_bar.gd" id="1_jlumw"]
+[ext_resource type="Script" uid="uid://dwsylmwr3aesi" path="res://scripts/health_bar.gd" id="1_jlumw"]
 
 [node name="HealthBar" type="ProgressBar"]
 z_index = 2

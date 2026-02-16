@@ -1,9 +1,9 @@
 [gd_scene load_steps=14 format=4 uid="uid://bu31hlst7ow2l"]
 
-[ext_resource type="Script" path="res://scripts/level_state.gd" id="1_kfxkx"]
+[ext_resource type="Script" uid="uid://5ty2hyusy472" path="res://scripts/level_state.gd" id="1_kfxkx"]
 [ext_resource type="PackedScene" uid="uid://dv7wsjusc4kpi" path="res://scenes/player.tscn" id="2_t5jgk"]
 [ext_resource type="TileSet" uid="uid://kcdwo4vbice0" path="res://resources/tileset/Water.tres" id="2_t6fl3"]
-[ext_resource type="Script" path="res://scripts/dynamic_camera.gd" id="3_7jhtk"]
+[ext_resource type="Script" uid="uid://6t025hugvph4" path="res://scripts/dynamic_camera.gd" id="3_7jhtk"]
 [ext_resource type="TileSet" uid="uid://de0nh3csoai65" path="res://resources/tileset/Foam.tres" id="3_mopjl"]
 [ext_resource type="TileSet" uid="uid://cxolrxollib5h" path="res://resources/tileset/Shadow.tres" id="4_o2pah"]
 [ext_resource type="PackedScene" uid="uid://e1wmunwb55ho" path="res://scenes/ui/pause_menu.tscn" id="4_pqq20"]

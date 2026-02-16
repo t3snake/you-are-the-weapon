@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://d11xgtdb0wku4"]
 
-[ext_resource type="Script" path="res://scripts/homing_fire.gd" id="1_8r02l"]
+[ext_resource type="Script" uid="uid://pgvj5wxjeff3" path="res://scripts/homing_fire.gd" id="1_8r02l"]
 [ext_resource type="Texture2D" uid="uid://b0xfie8h1evcr" path="res://assets/TinySword/Fire.png" id="1_fedni"]
 [ext_resource type="PackedScene" uid="uid://c4dcyu0ur6r8w" path="res://scenes/explosion.tscn" id="2_ifcpa"]
 

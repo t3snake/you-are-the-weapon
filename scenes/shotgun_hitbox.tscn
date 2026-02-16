@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cpyginnql37e4"]
 
-[ext_resource type="Script" path="res://scripts/shotgun_hitbox.gd" id="1_pk7ge"]
+[ext_resource type="Script" uid="uid://tme5j2m02wy2" path="res://scripts/shotgun_hitbox.gd" id="1_pk7ge"]
 [ext_resource type="Texture2D" uid="uid://bh34hkisyxbn4" path="res://assets/t3snake/shotgun-bullets.png" id="2_gbr8a"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s6f87"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=24 format=3 uid="uid://dh1ahk6c681uf"]
 
 [ext_resource type="Texture2D" uid="uid://bw3amxscqygqq" path="res://assets/naveena/background_scaled.png" id="1_a2k7q"]
-[ext_resource type="Script" path="res://scripts/ui/died_menu.gd" id="1_rts8r"]
+[ext_resource type="Script" uid="uid://c4ca8wypnlywc" path="res://scripts/ui/died_menu.gd" id="1_rts8r"]
 [ext_resource type="Texture2D" uid="uid://bke51fbx1daf7" path="res://assets/TinySword/Warrior_Blue.png" id="2_8553t"]
 [ext_resource type="Texture2D" uid="uid://dlk155uraykp2" path="res://assets/TinySword/Torch_Yellow.png" id="3_bjynh"]
 [ext_resource type="FontFile" uid="uid://cfrp63w0hyxlv" path="res://assets/MathewCarter/Charter Regular.ttf" id="4_kuoiw"]

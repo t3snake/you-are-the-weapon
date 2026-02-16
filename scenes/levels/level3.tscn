@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=4 uid="uid://cqggv8wqka58q"]
 
-[ext_resource type="Script" path="res://scripts/level_state.gd" id="1_8nxs8"]
+[ext_resource type="Script" uid="uid://5ty2hyusy472" path="res://scripts/level_state.gd" id="1_8nxs8"]
 [ext_resource type="TileSet" uid="uid://kcdwo4vbice0" path="res://resources/tileset/Water.tres" id="2_w2cjc"]
 [ext_resource type="TileSet" uid="uid://de0nh3csoai65" path="res://resources/tileset/Foam.tres" id="3_oc3g3"]
 [ext_resource type="Texture2D" uid="uid://bks32uvtv3b14" path="res://assets/TinySword/Terrain/Shadows.png" id="4_c3npv"]
@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dv7wsjusc4kpi" path="res://scenes/player.tscn" id="5_lxc3l"]
 [ext_resource type="PackedScene" uid="uid://ojg0qw01vfjx" path="res://scenes/dash_ghost_effect.tscn" id="6_e8h83"]
 [ext_resource type="TileSet" uid="uid://t0pxu0kifbv4" path="res://resources/tileset/Elevation.tres" id="6_qvh4c"]
-[ext_resource type="Script" path="res://scripts/dynamic_camera.gd" id="7_4va2m"]
+[ext_resource type="Script" uid="uid://6t025hugvph4" path="res://scripts/dynamic_camera.gd" id="7_4va2m"]
 [ext_resource type="PackedScene" uid="uid://d1loc7h3x5hd2" path="res://scenes/fire_goblin.tscn" id="8_uhlnm"]
 [ext_resource type="PackedScene" uid="uid://cidlj06ne568v" path="res://scenes/slime.tscn" id="9_nuylw"]
 [ext_resource type="PackedScene" uid="uid://e1wmunwb55ho" path="res://scenes/ui/pause_menu.tscn" id="10_6xqg0"]

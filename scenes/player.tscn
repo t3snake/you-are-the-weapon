@@ -1,11 +1,11 @@
 [gd_scene load_steps=12 format=3 uid="uid://dv7wsjusc4kpi"]
 
-[ext_resource type="Script" path="res://scripts/player.gd" id="1_hnj3e"]
+[ext_resource type="Script" uid="uid://uivle1g3yqxy" path="res://scripts/player.gd" id="1_hnj3e"]
 [ext_resource type="PackedScene" uid="uid://dw64ibpnrt1bu" path="res://scenes/slash.tscn" id="2_md23f"]
 [ext_resource type="SpriteFrames" uid="uid://bjfh85pfafb4h" path="res://resources/player.tres" id="3_qibpi"]
-[ext_resource type="Script" path="res://scripts/player_animations.gd" id="3_wxloe"]
+[ext_resource type="Script" uid="uid://bbvweyg66elqt" path="res://scripts/player_animations.gd" id="3_wxloe"]
 [ext_resource type="Texture2D" uid="uid://kfm4rtw7sldu" path="res://assets/TinySword/cursor.png" id="4_57dgs"]
-[ext_resource type="Script" path="res://scripts/shield.gd" id="6_b8h4f"]
+[ext_resource type="Script" uid="uid://bynqe6hc0txgo" path="res://scripts/shield.gd" id="6_b8h4f"]
 [ext_resource type="PackedScene" uid="uid://c3k7ii7vaqjay" path="res://scenes/health_bar.tscn" id="6_l2k7d"]
 [ext_resource type="PackedScene" uid="uid://cpyginnql37e4" path="res://scenes/shotgun_hitbox.tscn" id="8_13pdd"]
 

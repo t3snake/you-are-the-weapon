@@ -1,9 +1,9 @@
 [gd_scene load_steps=20 format=3 uid="uid://cidlj06ne568v"]
 
-[ext_resource type="Script" path="res://scripts/slime.gd" id="1_p0gd4"]
+[ext_resource type="Script" uid="uid://c63nufhyrx8tf" path="res://scripts/slime.gd" id="1_p0gd4"]
 [ext_resource type="Texture2D" uid="uid://bk5r8m12csyx7" path="res://assets/brackeys/slime_green.png" id="1_u5x6x"]
 [ext_resource type="PackedScene" uid="uid://c4dcyu0ur6r8w" path="res://scenes/explosion.tscn" id="2_t0hr5"]
-[ext_resource type="Script" path="res://scripts/slime_animation.gd" id="3_e48o1"]
+[ext_resource type="Script" uid="uid://bdwisemu6jmxg" path="res://scripts/slime_animation.gd" id="3_e48o1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t3x3c"]
 atlas = ExtResource("1_u5x6x")

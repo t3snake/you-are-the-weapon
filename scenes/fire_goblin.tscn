@@ -1,10 +1,10 @@
 [gd_scene load_steps=39 format=3 uid="uid://d1loc7h3x5hd2"]
 
-[ext_resource type="Script" path="res://scripts/fire_goblin.gd" id="1_7gy8t"]
+[ext_resource type="Script" uid="uid://dh1mbphghjxnp" path="res://scripts/fire_goblin.gd" id="1_7gy8t"]
 [ext_resource type="PackedScene" uid="uid://d11xgtdb0wku4" path="res://scenes/homing_fire.tscn" id="2_3mdgm"]
 [ext_resource type="Texture2D" uid="uid://dlk155uraykp2" path="res://assets/TinySword/Torch_Yellow.png" id="2_5j3i0"]
 [ext_resource type="PackedScene" uid="uid://c4dcyu0ur6r8w" path="res://scenes/explosion.tscn" id="3_xsxlu"]
-[ext_resource type="Script" path="res://scripts/fire_goblin_animation.gd" id="4_4r6f3"]
+[ext_resource type="Script" uid="uid://b2ojiwhbimyg" path="res://scripts/fire_goblin_animation.gd" id="4_4r6f3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a2yqv"]
 atlas = ExtResource("2_5j3i0")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=24 format=3 uid="uid://ci34hn5wyvjbq"]
 
-[ext_resource type="Script" path="res://scripts/ui/end_menu.gd" id="1_sfcoi"]
+[ext_resource type="Script" uid="uid://coaxh2m1jr8oi" path="res://scripts/ui/end_menu.gd" id="1_sfcoi"]
 [ext_resource type="Texture2D" uid="uid://bw3amxscqygqq" path="res://assets/naveena/background_scaled.png" id="1_xhijr"]
 [ext_resource type="Texture2D" uid="uid://bke51fbx1daf7" path="res://assets/TinySword/Warrior_Blue.png" id="2_nvg1v"]
 [ext_resource type="Texture2D" uid="uid://dlk155uraykp2" path="res://assets/TinySword/Torch_Yellow.png" id="3_1lssv"]

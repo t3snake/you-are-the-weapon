@@ -12,7 +12,7 @@ config_version=5
 
 config/name="You are the Weapon"
 run/main_scene="res://scenes/ui/main_menu.tscn"
-config/features=PackedStringArray("4.3", "GL Compatibility")
+config/features=PackedStringArray("4.4", "GL Compatibility")
 run/max_fps=141
 config/icon="res://assets/icon.svg"
 
